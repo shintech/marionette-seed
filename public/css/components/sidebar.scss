@@ -1,0 +1,40 @@
+.sidebar {
+  background-color: white;
+  text-align: center;
+  padding: 10px 10px 10px;
+  margin: 10px 0 10px 10px;
+  border: 1px solid black;
+  z-index: 1;
+  position: fixed;
+  top: 36px;
+  right: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;  
+}
+
+.sidebar li {
+  background-color: #333;  
+  margin: 1px;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.sidebar li:hover {
+  background-color: #4CAF50;
+  color: black;
+  cursor: pointer;
+}
+
+.sidebar li.toggle-nav {
+  background-color: black;
+  color: white;
+}
+.sidebar li.toggle-nav:hover {
+  background-color: #4CAF50;
+  color: black;
+}
