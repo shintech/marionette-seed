@@ -56,7 +56,7 @@ const config = {
   plugins: [
     HtmlWebpackPluginConfig,
     new webpack.ProvidePlugin({
-      $: 'lodash',
+      $: 'jquery',
       _: 'lodash'
     }),
     new ExtractTextPlugin('bundle.css'),

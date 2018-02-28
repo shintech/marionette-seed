@@ -1,5 +1,11 @@
 const RootView = Backbone.Marionette.View.extend({
-  template: '<h1>hello</h1>'
+  className: 'main',
+  template: require('../templates/root-view-template.html'),
+  regions: {
+    main: {
+      el: '#main-view'
+    }
+  }
 })
 
 export default RootView

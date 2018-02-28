@@ -27,7 +27,6 @@ export default function (options) {
       }
 
       res.status(200)
-
         .format({
           json: () => {
             res.set(headers(response, options))
@@ -56,6 +55,7 @@ export default function (options) {
       response = {
         body: { results, status, message }
       }
+
       res.status(200)
         .format({
           json: () => {
