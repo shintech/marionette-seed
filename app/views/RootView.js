@@ -1,10 +1,19 @@
+import NavigationView from './NavigationView'
+
 const RootView = Backbone.Marionette.View.extend({
-  className: 'main',
+  className: 'root',
   template: require('../templates/root-view-template.html'),
   regions: {
-    main: {
-      el: '#main-view'
+    header: {
+      el: '.header',
+      replaceElement: true
+    },
+    content: {
+      el: '.content'
     }
+  },
+  onRender: function () {
+    this.showChildView('header', new NavigationView())
   }
 })
 

@@ -8,7 +8,7 @@ export default function (options) {
     options.startTime = Date.now()
 
     try {
-      result = await db.one('insert into models(name, attribute)' + 'values( ${name}, ${attribute} ) returning id', req.body) // eslint-disable-line
+      result = await db.one('insert into models(first_name, last_name, email, optional)' + 'values( ${first_name}, ${last_name}, ${email}, ${optional} ) returning id', req.body) // eslint-disable-line
       status = 'success'
       message = `Inserted one model; id: ${result.id}...`
 

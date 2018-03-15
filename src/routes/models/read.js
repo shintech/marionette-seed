@@ -19,7 +19,7 @@ export default function (options) {
         status = 'error'
         message = err.message
 
-        logger.error(err.message)
+        logger.error(message)
       }
 
       response = {
@@ -39,6 +39,7 @@ export default function (options) {
 
     all: async function (req, res) {
       let results, status, message, response
+
       options.startTime = Date.now()
 
       try {
@@ -49,7 +50,7 @@ export default function (options) {
         status = 'error'
         message = err.message
 
-        logger.error(err.message)
+        logger.error(message)
       }
 
       response = {

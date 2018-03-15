@@ -2,7 +2,9 @@ import Marionette from 'marionette'
 
 const Router = Marionette.AppRouter.extend({
   appRoutes: {
-    '': 'index'
+    '': 'index',
+    'about': 'about',
+    'new': 'create'
   }
 })
 

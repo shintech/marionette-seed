@@ -1,1 +1,16 @@
-// test
+@import 'components/navbar';
+@import 'components/form';
+
+#root {
+  width: 100%;
+  display: grid;
+  grid-gap: 5px;
+  margin: 0;
+  grid-template-columns:  auto;
+  grid-template-rows: auto auto;
+}
+
+body { 
+  margin: 0;
+  background-color: lighten(lightgrey, 11%);
+}
