@@ -5,6 +5,8 @@ const FormView = Backbone.Marionette.View.extend({
 
   tagName: 'form',
 
+  className: 'content-view',
+
   events: {
     'click button': 'handleClick'
   },

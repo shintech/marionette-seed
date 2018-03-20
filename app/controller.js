@@ -6,7 +6,7 @@ import FormView from './views/FormView'
 
 const Controller = Marionette.Object.extend({
   initialize: function (options) {
-    this.app = options.app
+    this.app = options
     this.models = new Models()
   },
 
@@ -16,7 +16,7 @@ const Controller = Marionette.Object.extend({
 
     models.fetch({
       success: function (data) {
-        app.view.showChildView('content', new ModelsView({ collection: data }))
+        app.view.showChildView('content', new ModelsView({ app: app, collection: data }))
       },
       error: function (err) {
         console.log(err)
