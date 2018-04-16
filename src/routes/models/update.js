@@ -10,11 +10,9 @@ export default function (options) {
     options.startTime = Date.now()
 
     try {
-      result = await db.one('update models set name=$1, attribute=$2 where id=$3 returning id, name, attribute', [req.body.name, req.body.attribute, modelId])
+      result = await db.one('update models set first_name=$1, last_name=$2, email=$3, optional=$4 where id=$5 returning id, first_name, last_name, email, optional', [req.body.first_name, req.body.last_name, req.body.email, req.body.optional, modelId])
       status = 'success'
       message = `Updated model id: ${result.id}...`
-
-      logger.info(message)
     } catch (err) {
       status = 'error'
       message = err.message
@@ -22,9 +20,7 @@ export default function (options) {
       logger.error(err.message)
     }
 
-    response = {
-      body: { result, status, message }
-    }
+    response = { result, status, message }
 
     res.status(200)
       .format({

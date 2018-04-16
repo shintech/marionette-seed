@@ -22,9 +22,7 @@ export default function (options) {
         logger.error(message)
       }
 
-      response = {
-        body: { result, status, message }
-      }
+      response = { result, status, message }
 
       res.status(200)
         .format({
@@ -53,9 +51,7 @@ export default function (options) {
         logger.error(message)
       }
 
-      response = {
-        body: { results, status, message }
-      }
+      response = { results, status, message }
 
       res.status(200)
         .format({

@@ -1,6 +1,6 @@
 {
   "name": "marionette-seed",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -28,12 +28,12 @@
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "css-loader": "^0.28.1",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
-    "mocha": "^5.0.0",
+    "mocha": "^5.1.0",
     "npm-css": "^0.2.3",
     "pug": "^2.0.0-rc.4",
     "standard": "^10.0.2",

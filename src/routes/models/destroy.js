@@ -13,8 +13,6 @@ export default function (options) {
       result = await db.one('delete from models where id = $1 returning id', modelId)
       status = 'success'
       message = `Removed model id: ${result.id}...`
-
-      logger.info(`Removed model id: ${result.id}`)
     } catch (err) {
       status = 'error'
       message = err.message
@@ -22,9 +20,7 @@ export default function (options) {
       logger.error(err.message)
     }
 
-    response = {
-      body: { result, status, message }
-    }
+    response = { result, status, message }
 
     res.status(200)
       .format({

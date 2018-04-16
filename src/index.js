@@ -9,6 +9,8 @@ export function start (options, callback) {
   options.db = configDB(options)
   const router = configRouter(options)
 
+  const { environment } = options
+
   app.use('/api', router)
 
   app.get('/', (req, res) => {
@@ -47,5 +49,9 @@ export function start (options, callback) {
       })
   })
 
-  return Promise.resolve(server)
+  if (environment === 'test') {
+    return callback(server, options.db)
+  } else {
+    return Promise.resolve(server)
+  }
 }

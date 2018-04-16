@@ -11,8 +11,6 @@ export default function (options) {
       result = await db.one('insert into models(first_name, last_name, email, optional)' + 'values( ${first_name}, ${last_name}, ${email}, ${optional} ) returning id', req.body) // eslint-disable-line
       status = 'success'
       message = `Inserted one model; id: ${result.id}...`
-
-      logger.info(`Insterted one model; id: ${result.id}`)
     } catch (err) {
       status = 'error'
       message = err.message
@@ -20,9 +18,7 @@ export default function (options) {
       logger.error(err.message)
     }
 
-    response = {
-      body: { result, status, message }
-    }
+    response = { result, status, message }
 
     res.status(200)
       .format({
