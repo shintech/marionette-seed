@@ -6,16 +6,16 @@ const target = process.env['TARGET'] || 'http://localhost:8000/'
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: path.join(__dirname, 'app', 'index.html'),
+  template: path.join(__dirname, 'src', 'frontend', 'index.html'),
   filename: 'index.html',
   inject: 'body'
 })
 
 const paths = {
-  ENTRY: path.join(__dirname, 'app', 'index.js'),
+  ENTRY: path.join(__dirname, 'src', 'frontend', 'index.js'),
   OUTPUT_FILENAME: 'bundle.js',
-  OUTPUT: path.join(__dirname, 'build', 'static'),
-  APP: path.join(__dirname, 'app')
+  OUTPUT: path.join(__dirname, 'dist', 'frontend'),
+  APP: path.join(__dirname, 'src', 'frontend')
 }
 
 const config = {
@@ -29,7 +29,9 @@ const config = {
     alias: {
       'marionette': 'backbone.marionette',
       'underscore': 'lodash'
-    }
+    },
+    extensions: ['.js'],
+    modules: ['src/app', 'node_modules']
   },
 
   module: {
@@ -38,7 +40,7 @@ const config = {
         test: /\.js$/,
         enforce: 'pre',
         include: paths.APP,
-        exclude: [/node_modules/, path.join(__dirname, 'build'), paths.OUTPUT],
+        exclude: [/node_modules/, path.join(__dirname, 'dist'), paths.OUTPUT],
         use: ['babel-loader', 'standard-loader']
       },
 

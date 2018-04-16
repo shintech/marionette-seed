@@ -1,7 +1,7 @@
 import configApp from './app'
 import configServer from './server'
 import configRouter from './router'
-import configDB from './db.js'
+import configDB from './db'
 
 export function start (options, callback) {
   const app = configApp(options)

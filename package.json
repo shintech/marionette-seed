@@ -1,14 +1,14 @@
 {
   "name": "marionette-seed",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node dist/server.js",
     "dev": "NODE_ENV=development PORT=8000 TZ='America/Chicago' nodemon start.js",
-    "test": "NODE_ENV=test PORT=8001 TZ='America/Chicago' mocha build/test -t 10000",
-    "build": "babel -d build src",
-    "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'",
+    "test": "NODE_ENV=test PORT=8001 TZ='America/Chicago' mocha dist/test -t 10000",
+    "build": "babel -d dist src",
+    "watch": "babel --watch -d dist src --ignore src/frontend | ts '[%Y-%m-%d %H:%M:%S]'",
     "webpack": "webpack-dev-server --hot --inline"
   },
   "dependencies": {

@@ -1,7 +1,7 @@
 import App from './app'
 import Router from './router'
 import Controller from './controller'
-require('../public/less/index.less')
+require('../../public/less/index.less')
 
 const app = new App()
 

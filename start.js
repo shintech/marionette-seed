@@ -11,7 +11,7 @@ const options = {
   postgresURI: process.env['POSTGRES_URI'] || 'postgres://postgres:postgres@localhost:5432/api_development'
 }
 
-const application = require(path.join(__dirname, 'build'))
+const application = require(path.join(__dirname, 'dist'))
 
 application.start(options)
   .then(server => {

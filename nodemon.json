@@ -1,5 +1,5 @@
 {
-  "watch": ["build", "start.js"],
-  "ignore": ["build/static"],
+  "watch": ["dist", "start.js"],
+  "ignore": ["dist/app"],
   "ext": "js,json"
 }
