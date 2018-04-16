@@ -1,6 +1,8 @@
 const webpack = require('webpack')
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const environment = process.env['NODE_ENV'] || 'development'
+const target = process.env['TARGET'] || 'http://localhost:8000/'
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -8,8 +10,6 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 })
-
-const environment = process.env.NODE_ENV || 'production'
 
 const paths = {
   ENTRY: path.join(__dirname, 'app', 'index.js'),
@@ -22,12 +22,16 @@ const config = {
   entry: [
     paths.ENTRY
   ],
+
+  mode: environment,
+
   resolve: {
     alias: {
       'marionette': 'backbone.marionette',
       'underscore': 'lodash'
     }
   },
+
   module: {
     rules: [
       {
@@ -37,29 +41,38 @@ const config = {
         exclude: [/node_modules/, path.join(__dirname, 'build'), paths.OUTPUT],
         use: ['babel-loader', 'standard-loader']
       },
+
       { test: /\.html/, include: path.join(paths.APP, 'templates'), loader: 'underscore-template-loader' },
-      { test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader'],
-          publicPath: path.join(__dirname, 'public', 'css')
-        })
-      }
+      { test: /\.less$/i, use: ['style-loader', 'css-loader', 'less-loader'] }
     ]
   },
+
   output: {
     filename: paths.OUTPUT_FILENAME,
     path: paths.OUTPUT,
     chunkFilename: '[id].js'
   },
+
   devtool: 'source-map',
+
+  devServer: {
+    disableHostCheck: true,
+    host: '0.0.0.0',
+    port: 8081,
+    proxy: {
+      '/api': {
+        target: target,
+        secure: false
+      }
+    }
+  },
+
   plugins: [
     HtmlWebpackPluginConfig,
     new webpack.ProvidePlugin({
       $: 'jquery',
       _: 'lodash'
     }),
-    new ExtractTextPlugin('bundle.css'),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
@@ -70,18 +83,6 @@ const config = {
       }
     })
   ]
-}
-
-if (environment === 'production') {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      mangle: true,
-      sourcemap: false,
-      beautify: false,
-      dead_code: true
-    })
-  )
 }
 
 module.exports = config

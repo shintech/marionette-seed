@@ -1,7 +1,7 @@
 import App from './app'
 import Router from './router'
 import Controller from './controller'
-require('../public/css/index.scss')
+require('../public/less/index.less')
 
 const app = new App()
 
