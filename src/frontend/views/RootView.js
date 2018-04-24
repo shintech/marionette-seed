@@ -10,8 +10,12 @@ const RootView = Backbone.Marionette.View.extend({
     },
     content: {
       el: '.content'
+    },
+    modal: {
+      el: '.root-modal'
     }
   },
+
   onRender: function () {
     this.showChildView('header', new NavigationView())
   }

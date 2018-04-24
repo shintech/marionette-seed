@@ -3,21 +3,28 @@ import Models from './collections/Models'
 import ModelsView from './views/ModelsView'
 import AboutView from './views/AboutView'
 import FormView from './views/FormView'
+import SingleModelView from './views/SingleModelView'
 
 const Controller = Marionette.Object.extend({
   initialize: function (options) {
     this.app = options
-    this.models = new Models()
+    this.app.models = new Models()
   },
 
   index: function () {
     let app = this.app
-    const models = this.models
 
-    models.fetch({
+    this.app.models.fetch({
       success: function (data) {
-        app.view.showChildView('content', new ModelsView({ app: app, collection: data }))
+        app.modelsView = new ModelsView({ app: app, collection: data })
+
+        app.view.showChildView('content', app.modelsView)
+
+        app.modelsView.on('modelsView:trigger', (data) => {
+          app.view.showChildView('modal', new SingleModelView({ model: data }))
+        })
       },
+
       error: function (err) {
         console.log(err)
       }

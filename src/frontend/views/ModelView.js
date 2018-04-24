@@ -1,5 +1,3 @@
-import SingleModelView from './SingleModelView'
-
 const ModelView = Backbone.Marionette.View.extend({
   initialize: function (options) {
     this.app = options.app
@@ -13,15 +11,8 @@ const ModelView = Backbone.Marionette.View.extend({
     'click button': 'handleClick'
   },
 
-  regions: {
-    singleModel: {
-      el: '.single-model'
-    }
-  },
-
   handleClick: function (e) {
-    console.log(this.model.get('id'))
-    this.showChildView('singleModel', new SingleModelView({ model: this.model }))
+    this.app.modelsView.triggerMethod('modelsView:trigger', this.model)
   }
 })
 
