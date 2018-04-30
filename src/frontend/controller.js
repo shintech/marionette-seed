@@ -16,7 +16,7 @@ const Controller = Marionette.Object.extend({
     let models
 
     try {
-      models = await fetch(this.app.models)
+      models = await app.models.asyncFetch()
     } catch (err) {
       console.error(err.message)
     }
@@ -42,20 +42,5 @@ const Controller = Marionette.Object.extend({
     app.view.showChildView('content', new FormView())
   }
 })
-
-function fetch (models) {
-  let defer = $.Deferred()
-
-  models.fetch({
-    success: function (data) {
-      defer.resolve(data)
-    },
-    error: function (err) {
-      defer.reject(err)
-    }
-  })
-
-  return defer.promise()
-}
 
 export default Controller
