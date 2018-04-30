@@ -31,7 +31,7 @@ const config = {
       'underscore': 'lodash'
     },
     extensions: ['.js'],
-    modules: ['src/app', 'node_modules']
+    modules: ['src/frontend', 'node_modules']
   },
 
   module: {

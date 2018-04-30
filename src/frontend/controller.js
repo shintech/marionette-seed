@@ -11,23 +11,22 @@ const Controller = Marionette.Object.extend({
     this.app.models = new Models()
   },
 
-  index: function () {
+  index: async function () {
     let app = this.app
+    let models
 
-    this.app.models.fetch({
-      success: function (data) {
-        app.modelsView = new ModelsView({ app: app, collection: data })
+    try {
+      models = await fetch(this.app.models)
+    } catch (err) {
+      console.error(err.message)
+    }
 
-        app.view.showChildView('content', app.modelsView)
+    let modelsView = new ModelsView({ app: app, collection: models })
 
-        app.modelsView.on('modelsView:trigger', (data) => {
-          app.view.showChildView('modal', new SingleModelView({ model: data }))
-        })
-      },
+    app.view.showChildView('content', modelsView)
 
-      error: function (err) {
-        console.log(err)
-      }
+    app.view.on('modal:trigger', (model) => {
+      app.view.showChildView('modal', new SingleModelView({ model: model }))
     })
   },
 
@@ -43,5 +42,20 @@ const Controller = Marionette.Object.extend({
     app.view.showChildView('content', new FormView())
   }
 })
+
+function fetch (models) {
+  let defer = $.Deferred()
+
+  models.fetch({
+    success: function (data) {
+      defer.resolve(data)
+    },
+    error: function (err) {
+      defer.reject(err)
+    }
+  })
+
+  return defer.promise()
+}
 
 export default Controller

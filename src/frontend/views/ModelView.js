@@ -12,7 +12,7 @@ const ModelView = Backbone.Marionette.View.extend({
   },
 
   handleClick: function (e) {
-    this.app.modelsView.triggerMethod('modelsView:trigger', this.model)
+    this.app.view.triggerMethod('modal:trigger', this.model)
   }
 })
 
