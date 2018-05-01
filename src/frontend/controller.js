@@ -16,7 +16,7 @@ const Controller = Marionette.Object.extend({
     let models
 
     try {
-      models = await app.models.asyncFetch()
+      models = await app.lookup(app.models)
     } catch (err) {
       console.error(err.message)
     }

@@ -7,22 +7,6 @@ const Models = Backbone.Collection.extend({
 
   parse: function (data) {
     return data['results']
-  },
-
-  asyncFetch: function () {
-    let defer = $.Deferred()
-
-    this.fetch({
-      success: function (data) {
-        defer.resolve(data)
-      },
-
-      error: function (err) {
-        defer.reject(err)
-      }
-    })
-
-    return defer.promise()
   }
 })
 
