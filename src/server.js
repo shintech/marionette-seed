@@ -7,12 +7,6 @@ export default function (app, options) {
 
   const server = http.Server(app)
 
-  server.on('request', (req, res) => {
-    if (environment !== 'test') {
-      logger.info(`${res.statusCode} - ${req.method} => ${req.url}`)
-    }
-  })
-
   server.on('listening', () => {
     if (environment !== 'test') {
       logger.info(`${chalk.bgBlack.cyan(pkg.name)} version ${chalk.bgBlack.yellow(pkg.version)} is listening on port ${chalk.bgBlack.green(port)}...`)

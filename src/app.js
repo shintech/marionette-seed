@@ -2,11 +2,16 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import favicon from 'serve-favicon'
 import path from 'path'
+import morgan from 'morgan'
 
 const app = express()
 
 export default function (options) {
-  const { basedir, logger } = options
+  const { environment, basedir, logger } = options
+
+  if (environment !== 'test') {
+    app.use(morgan((environment === 'development') ? 'dev' : 'common'))
+  }
 
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())

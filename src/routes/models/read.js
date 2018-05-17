@@ -4,27 +4,25 @@ export default function (options) {
   const { db, logger } = options
 
   return {
-    one: async function (req, res) {
-      const modelId = parseInt(req.params.id)
-
-      let result, status, message, response
+    all: async function (req, res) {
+      let results, status, message, response
 
       options.startTime = Date.now()
 
       try {
-        result = await db.one('select * from models where id = $1', modelId)
-        message = `Successfully fetched one model...`
-        status = 'success'
+        results = await db.any('select * from models')
+        status = 200
+        message = `Successfully fetched ${results.length} models...`
       } catch (err) {
-        status = 'error'
-        message = err.message
+        message = err.message || err
+        status = (err.constructor.name === 'QueryResultError') ? 404 : 500
 
         logger.error(message)
       }
 
-      response = { result, status, message }
+      response = { results, status, message }
 
-      res.status(200)
+      res.status(status)
         .format({
           json: () => {
             res.set(headers(response, options))
@@ -35,25 +33,27 @@ export default function (options) {
         })
     },
 
-    all: async function (req, res) {
-      let results, status, message, response
+    one: async function (req, res) {
+      const modelId = parseInt(req.params.id)
+
+      let result, status, message, response
 
       options.startTime = Date.now()
 
       try {
-        results = await db.any('select * from models')
-        status = 'success'
-        message = `Successfully fetched ${results.length} models...`
+        result = await db.one('select * from models where id = $1', modelId)
+        message = `Successfully fetched one model...`
+        status = 200
       } catch (err) {
-        status = 'error'
-        message = err.message
+        message = err.message || err
+        status = (err.constructor.name === 'QueryResultError') ? 404 : 500
 
         logger.error(message)
       }
 
-      response = { results, status, message }
+      response = { result, status, message }
 
-      res.status(200)
+      res.status(status)
         .format({
           json: () => {
             res.set(headers(response, options))
