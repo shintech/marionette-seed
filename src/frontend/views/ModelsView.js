@@ -1,8 +1,10 @@
 import ModelView from './ModelView'
 
 const ModelsView = Backbone.Marionette.CollectionView.extend({
-  initialize: function (options) {
-    this.options = options
+  initialize: function (app) {
+    this.app = app
+    this.collection = app.models
+    this.collection.on('sync', this.render)
   },
 
   className: 'content-view',
@@ -12,7 +14,7 @@ const ModelsView = Backbone.Marionette.CollectionView.extend({
   childView: ModelView,
 
   childViewOptions: function () {
-    return this.options
+    return this.app
   }
 })
 

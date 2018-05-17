@@ -4,16 +4,19 @@ const FormView = Backbone.Marionette.View.extend({
   template: require('../templates/form-view-template.html'),
 
   tagName: 'form',
-
-  className: 'content-view',
-
   events: {
-    'click button': 'handleClick'
+    'click .submit': 'submitForm'
   },
 
-  handleClick: function (e) {
-    e.preventDefault()
+  className: 'form',
 
+  initialize: function (options) {
+    this.app = options.app
+  },
+
+  submitForm: function (e) {
+    e.preventDefault()
+    let app = this.app
     let model = new Model()
 
     const modelAttrs = {
@@ -29,7 +32,10 @@ const FormView = Backbone.Marionette.View.extend({
     model.save(modelAttrs, {
       success: () => {
         console.log('success')
+        this.collection.add(model)
+        app.modalView.hide()
       },
+
       error: (err) => {
         console.log(err)
       }

@@ -1,6 +1,6 @@
 const ModelView = Backbone.Marionette.View.extend({
-  initialize: function (options) {
-    this.app = options.app
+  initialize: function (app) {
+    this.app = app
   },
 
   tagName: 'li',
@@ -12,7 +12,7 @@ const ModelView = Backbone.Marionette.View.extend({
   },
 
   handleClick: function (e) {
-    this.app.view.triggerMethod('modal:trigger', this.model)
+    this.app.view.triggerMethod('modal:model', this.model)
   }
 })
 
