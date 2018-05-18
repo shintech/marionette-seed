@@ -32,12 +32,12 @@ const Controller = Marionette.Object.extend({
     app.view.showChildView('content', new ModelsView(app))
 
     app.view.on('modal:model', (model) => { // This is triggered in ModelView.js
-      app.modalView.showChildView('body', new SingleModelView({ model: model }))
+      app.modalView.showChildView('body', new SingleModelView({ app, model }))
       app.modalView.show()
     })
 
-    app.view.on('modal:form', (collection) => { // This is triggered in NavigationView.js
-      app.modalView.showChildView('body', new FormView({ app: app, collection: collection }))
+    app.view.on('modal:form', (model, collection) => { // This is triggered in NavigationView, SingleModelView
+      app.modalView.showChildView('body', new FormView({ app, model, collection }))
       app.modalView.show()
     })
   },

@@ -4,7 +4,7 @@ const NavigationView = Backbone.Marionette.View.extend({
   className: 'navbar',
   events: {
     'click #create-new': function () {
-      this.app.view.triggerMethod('modal:form', this.collection)
+      this.app.view.triggerMethod('modal:form', null, this.collection)
     }
   },
 
