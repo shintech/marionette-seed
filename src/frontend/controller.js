@@ -24,8 +24,6 @@ const Controller = Marionette.Object.extend({
 
     app.view.showChildView('modal', app.modalView)
     app.view.showChildView('header', new NavigationView({ app: app, collection: users }))
-
-    app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
   },
 
   index: async function () {
