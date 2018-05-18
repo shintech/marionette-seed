@@ -1,4 +1,4 @@
-import Model from '../models/Model'
+import Model from '../models/User'
 
 const FormView = Backbone.Marionette.View.extend({
   template: require('../templates/form-view-template.html'),
@@ -32,6 +32,7 @@ const FormView = Backbone.Marionette.View.extend({
     e.preventDefault()
     let app = this.app
     let model = this.model
+
     const modelAttrs = {
       first_name: $('[name="first_name"]').val(),
       last_name: $('[name="last_name"]').val(),
@@ -48,10 +49,13 @@ const FormView = Backbone.Marionette.View.extend({
 
         this.collection.add(model)
         app.modalView.hide()
+        app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
       },
 
       error: (err) => {
         console.error(err)
+
+        app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
       }
     })
   }

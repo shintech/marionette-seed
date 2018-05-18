@@ -41,7 +41,7 @@ const AboutView = Backbone.Marionette.View.extend({
     $(e.target).append($(document.getElementById(this.draggable)))
 
     $('.images').html('You chose:')
-    $('.images').append(`<h1 style="color:red;">${this.draggable}</h1>`)
+    $('.images').append(`<h1 style="color:red;">${this.draggable}!</h1>`)
   }
 })
 

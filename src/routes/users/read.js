@@ -10,7 +10,7 @@ export default function (options) {
       options.startTime = Date.now()
 
       try {
-        results = await db.any('select * from models')
+        results = await db.any('select * from users')
         status = 200
       } catch (err) {
         results = { error: err.message || err }
@@ -31,14 +31,14 @@ export default function (options) {
     },
 
     one: async function (req, res) {
-      const modelId = parseInt(req.params.id)
+      const userId = parseInt(req.params.id)
 
       let result, status
 
       options.startTime = Date.now()
 
       try {
-        result = await db.one('select * from models where id = $1', modelId)
+        result = await db.one('select * from users where id = $1', userId)
         status = 200
       } catch (err) {
         result = { error: err.message || err }

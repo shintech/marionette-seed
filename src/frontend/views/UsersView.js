@@ -1,9 +1,9 @@
-import ModelView from './ModelView'
+import UserView from './UserView'
 
-const ModelsView = Backbone.Marionette.CollectionView.extend({
+const UsersView = Backbone.Marionette.CollectionView.extend({
   initialize: function (app) {
     this.app = app
-    this.collection = app.models
+    this.collection = app.users
     this.collection.on('sync', this.render)
   },
 
@@ -11,11 +11,11 @@ const ModelsView = Backbone.Marionette.CollectionView.extend({
 
   tagName: 'ul',
 
-  childView: ModelView,
+  childView: UserView,
 
   childViewOptions: function () {
     return this.app
   }
 })
 
-export default ModelsView
+export default UsersView

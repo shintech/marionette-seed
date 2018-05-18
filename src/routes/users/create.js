@@ -4,19 +4,17 @@ export default function (options) {
   const { db, logger } = options
 
   return async function (req, res) {
-    const modelId = parseInt(req.params.id)
-
     let result, status
     options.startTime = Date.now()
 
     try {
-      result = await db.one('update models set first_name=$1, last_name=$2, email=$3, optional=$4 where id=$5 returning id, first_name, last_name, email, optional', [req.body.first_name, req.body.last_name, req.body.email, req.body.optional, modelId])
+      result = await db.one('insert into users(first_name, last_name, email, optional)' + 'values( ${first_name}, ${last_name}, ${email}, ${optional} ) returning id', req.body) // eslint-disable-line
       status = 200
     } catch (err) {
+      status = 500
       result = { error: err.message || err }
-      status = (err.constructor.name === 'QueryResultError') ? 404 : 500
 
-      logger.error(result.error)
+      logger.error(err.message)
     }
 
     res.status(status)
@@ -24,7 +22,6 @@ export default function (options) {
         json: () => {
           res.set(headers(result, options))
             .write(JSON.stringify(result))
-
           res.end()
         }
       })

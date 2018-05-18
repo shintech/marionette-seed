@@ -1,21 +1,21 @@
 import Marionette from 'marionette'
-import Models from './collections/Models'
-import ModelsView from './views/ModelsView'
+import Users from './collections/Users'
+import UsersView from './views/UsersView'
 import AboutView from './views/AboutView'
 import FormView from './views/FormView'
-import SingleModelView from './views/SingleModelView'
+import SingleUserView from './views/SingleUserView'
 import NavigationView from './views/NavigationView'
 import ModalView from './views/ModalView'
 
 const Controller = Marionette.Object.extend({
   initialize: async function (app) {
     this.app = app
-    let models
+    let users
 
-    app.models = new Models()
+    app.users = new Users()
 
     try {
-      models = await app.lookup(app.models)
+      users = await app.lookup(app.users)
     } catch (err) {
       console.error(err.message)
     }
@@ -23,20 +23,22 @@ const Controller = Marionette.Object.extend({
     app.modalView = new ModalView(app)
 
     app.view.showChildView('modal', app.modalView)
-    app.view.showChildView('header', new NavigationView({ app: app, collection: models }))
+    app.view.showChildView('header', new NavigationView({ app: app, collection: users }))
+
+    app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
   },
 
   index: async function () {
     let app = this.app
 
-    app.view.showChildView('content', new ModelsView(app))
+    app.view.showChildView('content', new UsersView(app))
 
-    app.view.on('modal:model', (model) => { // This is triggered in ModelView.js
-      app.modalView.showChildView('body', new SingleModelView({ app, model }))
+    app.view.on('modal:user', (model) => { // This is triggered in UserView.js
+      app.modalView.showChildView('body', new SingleUserView({ app, model }))
       app.modalView.show()
     })
 
-    app.view.on('modal:form', (model, collection) => { // This is triggered in NavigationView, SingleModelView
+    app.view.on('modal:form', (model, collection) => { // This is triggered in NavigationView, SingleUserView
       app.modalView.showChildView('body', new FormView({ app, model, collection }))
       app.modalView.show()
     })

@@ -4,13 +4,13 @@ export default function (options) {
   const { db, logger } = options
 
   return async function (req, res) {
-    const modelId = parseInt(req.params.id)
+    const userId = parseInt(req.params.id)
 
     let result, status
     options.startTime = Date.now()
 
     try {
-      result = await db.one('delete from models where id = $1 returning id', modelId)
+      result = await db.one('delete from users where id = $1 returning id', userId)
       status = 200
     } catch (err) {
       result = { error: err.message || err }

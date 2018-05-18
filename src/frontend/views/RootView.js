@@ -6,6 +6,10 @@ const RootView = Backbone.Marionette.View.extend({
       el: '.header',
       replaceElement: true
     },
+    flash: {
+      el: '.flash',
+      replaceElement: true
+    },
     content: {
       el: '.content'
     },

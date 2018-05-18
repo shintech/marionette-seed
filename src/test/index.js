@@ -21,10 +21,10 @@ const options = {
 const application = require('../../dist')
 
 application.start(options, (server, db) => {
-  describe('Models', () => {
+  describe('Users', () => {
     before(async function () {
       try {
-        await db.none('truncate models restart identity')
+        await db.none('truncate users restart identity')
       } catch (err) {
         console.log(err)
       }
@@ -32,7 +32,7 @@ application.start(options, (server, db) => {
 
     beforeEach(async function () {
       try {
-        await db.none('insert into models( first_name, last_name, email, optional)' + 'values($1, $2, $3, $4)', ['first_name', 'last_name', 'email@example.com', 'option1'])
+        await db.none('insert into users( first_name, last_name, email, optional)' + 'values($1, $2, $3, $4)', ['first_name', 'last_name', 'email@example.com', 'option1'])
       } catch (err) {
         console.log(err)
       }
@@ -40,16 +40,16 @@ application.start(options, (server, db) => {
 
     afterEach(async function () {
       try {
-        await db.none('truncate models restart identity')
+        await db.none('truncate users restart identity')
       } catch (err) {
         console.log(err)
       }
     })
 
     /*eslint-disable */
-    it('GET /api/models -> should get all models', done => {
+    it('GET /api/users -> should get all users', done => {
       chai.request(server)
-        .get('/api/models')
+        .get('/api/users')
         .end(function (err, res) {
           expect(err).to.be.null
           expect(res).to.have.status(200)
@@ -59,13 +59,13 @@ application.start(options, (server, db) => {
         })
     })
 
-    it('GET /api/models/:id -> should get a single model', done => {
+    it('GET /api/users/:id -> should get a single user', done => {
       chai.request(server)
-        .get('/api/models')
+        .get('/api/users')
         .end((error, response) => {
           expect(error).to.be.null
           chai.request(server)
-            .get(`/api/models/${response.body[0].id}`)
+            .get(`/api/users/${response.body[0].id}`)
             .end((err, res) => {
               expect(err).to.be.null
               expect(res).to.have.status(200)
@@ -88,13 +88,13 @@ application.start(options, (server, db) => {
         })
     })
 
-    it('POST /api/models -> should create a single model', done => {
+    it('POST /api/users -> should create a single user', done => {
       chai.request(server)
-        .post('/api/models')
+        .post('/api/users')
         .send({
           first_name: 'new',
-          last_name: 'model',
-          email: 'newModel@example.com',
+          last_name: 'user',
+          email: 'newUser@example.com',
           optional: 'option2'
         })
         .end((err, res) => {
@@ -105,13 +105,13 @@ application.start(options, (server, db) => {
         })
     })
 
-    it('PUT /api/models/:id -> should update a single model', done => {
+    it('PUT /api/users/:id -> should update a single user', done => {
       chai.request(server)
-        .get('/api/models')
+        .get('/api/users')
         .end((error, response) => {
           expect(error).to.be.null
           chai.request(server)
-            .put(`/api/models/${response.body[0].id}`)
+            .put(`/api/users/${response.body[0].id}`)
             .send({
               first_name: 'newFirstName',
               last_name: 'newLastName',
@@ -123,7 +123,7 @@ application.start(options, (server, db) => {
               expect(res).to.have.status(200)
               expect(res).to.be.json
               chai.request(server)
-                .get('/api/models')
+                .get('/api/users')
                 .end((e, r) => {
                   expect(e).to.be.null
                   expect(r.body[0]).to.have.property('id')
@@ -144,13 +144,13 @@ application.start(options, (server, db) => {
         })
     })
 
-    it('DELETE /api/models/:id -> should delete one model', done => {
+    it('DELETE /api/users/:id -> should delete one user', done => {
       chai.request(server)
-        .get('/api/models')
+        .get('/api/users')
         .end((error, response) => {
           expect(error).to.be.null
           chai.request(server)
-            .delete(`/api/models/${response.body[0].id}`)
+            .delete(`/api/users/${response.body[0].id}`)
             .end((err, res) => {
               expect(err).to.be.null
               expect(res).to.have.status(200)

@@ -1,7 +1,7 @@
 import home from './home'
-import models from './models'
+import users from './users'
 
 export {
   home,
-  models
+  users
 }

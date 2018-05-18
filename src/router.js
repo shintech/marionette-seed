@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {home, models} from './routes'
+import {home, users} from './routes'
 
 const router = Router()
 
@@ -7,14 +7,14 @@ export default function (options) {
   router.route('/home')
     .get(home(options).home)
 
-  router.route('/models')
-    .get(models(options).read.all)
-    .post(models(options).create)
+  router.route('/users')
+    .get(users(options).read.all)
+    .post(users(options).create)
 
-  router.route('/models/:id')
-    .get(models(options).read.one)
-    .put(models(options).update)
-    .delete(models(options).destroy)
+  router.route('/users/:id')
+    .get(users(options).read.one)
+    .put(users(options).update)
+    .delete(users(options).destroy)
 
   return router
 }
