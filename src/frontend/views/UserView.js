@@ -3,12 +3,14 @@ const UserView = Backbone.Marionette.View.extend({
     this.app = app
   },
 
+  className: 'user-view',
+
   tagName: 'li',
 
   template: require('../templates/user-view-template.html'),
 
   events: {
-    'click button': 'handleClick'
+    'click': 'handleClick'
   },
 
   handleClick: function (e) {

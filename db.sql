@@ -13,33 +13,21 @@ CREATE TABLE users (
   created_at TIMESTAMP without time zone default (now() at time zone 'utc')
 );
 
-
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Nathanial', 'Robel', 'option1', 'River77@example.org', 'et' );
-
+VALUES ( 'Fredrick', 'Mayer', 'ROI', 'Aron12@example.com', 'vertical embrace web-readiness' );
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Trent', 'Satterfield', 'option1', 'Flavie_Hoeger65@example.com', 'corporis' );
-
+VALUES ( 'Jean', 'Altenwerth', 'e-services', 'Trevor_Emard14@example.com', 'robust unleash niches' );
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Shayna', 'Predovic', 'option1', 'Darrick.Boyer78@example.com', 'voluptas' );
-
+VALUES ( 'Nadia', 'Tromp', 'e-services', 'Wyman72@example.net', 'plug-and-play productize platforms' );
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Maximillia', 'Hoppe', 'option1', 'Rashawn.Hintz@example.com', 'a' );
-
+VALUES ( 'Rebecca', 'Feil', 'systems', 'Jackeline91@example.org', 'frictionless evolve functionalities' );
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Camryn', 'Bailey', 'option1', 'Luis_Barton@example.net', 'tempora' );
-
+VALUES ( 'Jarred', 'Prohaska', 'markets', 'Linda18@example.net', 'synergistic whiteboard metrics' );
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Roselyn', 'Fahey', 'option1', 'Karina62@example.org', 'rerum' );
-
+VALUES ( 'Muriel', 'Carter', 'web services', 'Thaddeus30@example.com', 'killer visualize systems' );
 INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Burnice', 'McDermott', 'option1', 'Nella_Heidenreich68@example.net', 'quia' );
+VALUES ( 'Lizzie', 'Ward', 'metrics', 'Matteo.Mosciski@example.com', 'end-to-end monetize schemas' );
 
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Anabelle', 'Tremblay', 'option1', 'Hadley_Lynch@example.org', 'consequuntur' );
-
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Kay', 'Marks', 'option1', 'Deanna10@example.com', 'corporis' );
 
 INSERT INTO users ( first_name, last_name, optional, email, message )
 VALUES ( 'Kill', 'Bill', 'option1', 'killbill@example.org', '$2a$10$dbnjt3x9vj4brOcq0qyxyOmhw6XZJV3o5SdFDtDkFs4t1X4KhW46m' );
