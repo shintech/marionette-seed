@@ -23,7 +23,7 @@ const Controller = Marionette.Object.extend({
     app.modalView = new ModalView(app)
 
     app.view.showChildView('modal', app.modalView)
-    app.view.showChildView('header', new NavigationView({app: app, collection: models}))
+    app.view.showChildView('header', new NavigationView({ app: app, collection: models }))
   },
 
   index: async function () {
@@ -46,12 +46,6 @@ const Controller = Marionette.Object.extend({
     let app = this.app
 
     app.view.showChildView('content', new AboutView())
-  },
-
-  create: function () {
-    let app = this.app
-
-    app.view.showChildView('content', new FormView())
   }
 })
 

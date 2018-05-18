@@ -5,28 +5,24 @@ export default function (options) {
 
   return {
     all: async function (req, res) {
-      let results, status, message, response
+      let results, status
 
       options.startTime = Date.now()
 
       try {
         results = await db.any('select * from models')
         status = 200
-        message = `Successfully fetched ${results.length} models...`
       } catch (err) {
-        message = err.message || err
+        results = { error: err.message || err }
         status = (err.constructor.name === 'QueryResultError') ? 404 : 500
-
-        logger.error(message)
+        logger.error(results.error)
       }
-
-      response = { results, status, message }
 
       res.status(status)
         .format({
           json: () => {
-            res.set(headers(response, options))
-              .write(JSON.stringify(response))
+            res.set(headers(results, options))
+              .write(JSON.stringify(results))
 
             res.end()
           }
@@ -36,28 +32,24 @@ export default function (options) {
     one: async function (req, res) {
       const modelId = parseInt(req.params.id)
 
-      let result, status, message, response
+      let result, status
 
       options.startTime = Date.now()
 
       try {
         result = await db.one('select * from models where id = $1', modelId)
-        message = `Successfully fetched one model...`
         status = 200
       } catch (err) {
-        message = err.message || err
+        result = { error: err.message || err }
         status = (err.constructor.name === 'QueryResultError') ? 404 : 500
-
-        logger.error(message)
+        logger.error(result.error)
       }
-
-      response = { result, status, message }
 
       res.status(status)
         .format({
           json: () => {
-            res.set(headers(response, options))
-              .write(JSON.stringify(response))
+            res.set(headers(result, options))
+              .write(JSON.stringify(result))
 
             res.end()
           }
