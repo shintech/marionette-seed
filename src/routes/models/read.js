@@ -15,6 +15,7 @@ export default function (options) {
       } catch (err) {
         results = { error: err.message || err }
         status = (err.constructor.name === 'QueryResultError') ? 404 : 500
+
         logger.error(results.error)
       }
 
@@ -42,6 +43,7 @@ export default function (options) {
       } catch (err) {
         result = { error: err.message || err }
         status = (err.constructor.name === 'QueryResultError') ? 404 : 500
+
         logger.error(result.error)
       }
 

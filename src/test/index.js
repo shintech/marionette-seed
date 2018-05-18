@@ -54,7 +54,7 @@ application.start(options, (server, db) => {
           expect(err).to.be.null
           expect(res).to.have.status(200)
           expect(res).to.be.json
-          expect(res.body.results[0]).to.have.property('id')
+          expect(res.body[0]).to.have.property('id')
           done()
         })
     })
@@ -65,23 +65,23 @@ application.start(options, (server, db) => {
         .end((error, response) => {
           expect(error).to.be.null
           chai.request(server)
-            .get(`/api/models/${response.body.results[0].id}`)
+            .get(`/api/models/${response.body[0].id}`)
             .end((err, res) => {
               expect(err).to.be.null
               expect(res).to.have.status(200)
               expect(res).to.be.json
 
-              expect(res.body.result).to.have.property('id')
-              expect(res.body.result).to.have.property('first_name')
-              expect(res.body.result).to.have.property('last_name')
-              expect(res.body.result).to.have.property('email')
-              expect(res.body.result).to.have.property('optional')
-              expect(res.body.result).to.have.property('created_at')
+              expect(res.body).to.have.property('id')
+              expect(res.body).to.have.property('first_name')
+              expect(res.body).to.have.property('last_name')
+              expect(res.body).to.have.property('email')
+              expect(res.body).to.have.property('optional')
+              expect(res.body).to.have.property('created_at')
 
-              expect(res.body.result['first_name']).to.equal('first_name')
-              expect(res.body.result['last_name']).to.equal('last_name')
-              expect(res.body.result['email']).to.equal('email@example.com')
-              expect(res.body.result['optional']).to.equal('option1')
+              expect(res.body['first_name']).to.equal('first_name')
+              expect(res.body['last_name']).to.equal('last_name')
+              expect(res.body['email']).to.equal('email@example.com')
+              expect(res.body['optional']).to.equal('option1')
 
               done()
             })
@@ -111,7 +111,7 @@ application.start(options, (server, db) => {
         .end((error, response) => {
           expect(error).to.be.null
           chai.request(server)
-            .put(`/api/models/${response.body.results[0].id}`)
+            .put(`/api/models/${response.body[0].id}`)
             .send({
               first_name: 'newFirstName',
               last_name: 'newLastName',
@@ -126,17 +126,17 @@ application.start(options, (server, db) => {
                 .get('/api/models')
                 .end((e, r) => {
                   expect(e).to.be.null
-                  expect(r.body.results[0]).to.have.property('id')
-                  expect(r.body.results[0]).to.have.property('first_name')
-                  expect(r.body.results[0]).to.have.property('last_name')
-                  expect(r.body.results[0]).to.have.property('email')
-                  expect(r.body.results[0]).to.have.property('optional')
-                  expect(r.body.results[0]).to.have.property('created_at')
+                  expect(r.body[0]).to.have.property('id')
+                  expect(r.body[0]).to.have.property('first_name')
+                  expect(r.body[0]).to.have.property('last_name')
+                  expect(r.body[0]).to.have.property('email')
+                  expect(r.body[0]).to.have.property('optional')
+                  expect(r.body[0]).to.have.property('created_at')
 
-                  expect(r.body.results[0]['first_name']).to.equal('newFirstName')
-                  expect(r.body.results[0]['last_name']).to.equal('newLastName')
-                  expect(r.body.results[0]['email']).to.equal('newEmail@exapmle.com')
-                  expect(r.body.results[0]['optional']).to.equal('option3')
+                  expect(r.body[0]['first_name']).to.equal('newFirstName')
+                  expect(r.body[0]['last_name']).to.equal('newLastName')
+                  expect(r.body[0]['email']).to.equal('newEmail@exapmle.com')
+                  expect(r.body[0]['optional']).to.equal('option3')
 
                   done()
                 })
@@ -150,7 +150,7 @@ application.start(options, (server, db) => {
         .end((error, response) => {
           expect(error).to.be.null
           chai.request(server)
-            .delete(`/api/models/${response.body.results[0].id}`)
+            .delete(`/api/models/${response.body[0].id}`)
             .end((err, res) => {
               expect(err).to.be.null
               expect(res).to.have.status(200)

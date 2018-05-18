@@ -13,6 +13,7 @@ export default function (options) {
     } catch (err) {
       status = 500
       result = { error: err.message || err }
+
       logger.error(err.message)
     }
 

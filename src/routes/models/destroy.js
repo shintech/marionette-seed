@@ -6,27 +6,24 @@ export default function (options) {
   return async function (req, res) {
     const modelId = parseInt(req.params.id)
 
-    let result, status, message, response
+    let result, status
     options.startTime = Date.now()
 
     try {
       result = await db.one('delete from models where id = $1 returning id', modelId)
-      status = 'success'
-      message = `Removed model id: ${result.id}...`
+      status = 200
     } catch (err) {
-      status = 'error'
-      message = err.message
+      result = { error: err.message || err }
+      status = (err.constructor.name === 'QueryResultError') ? 404 : 500
 
-      logger.error(err.message)
+      logger.error(result.error)
     }
 
-    response = { result, status, message }
-
-    res.status(200)
+    res.status(status)
       .format({
         json: () => {
-          res.set(headers(response, options))
-            .write(JSON.stringify(response))
+          res.set(headers(result, options))
+            .write(JSON.stringify(result))
 
           res.end()
         }
