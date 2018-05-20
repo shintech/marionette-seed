@@ -11,8 +11,4 @@ mkdir dist && \
 printf "\nInstalling packages...\n" && \
 yarn install && \
 
-printf "\nBuilding in progress...\nPlease wait...\n\n" && \
-npm run -s build && \
-webpack && \
-
 printf "All done...\n"
