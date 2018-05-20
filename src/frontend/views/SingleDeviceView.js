@@ -1,6 +1,6 @@
-const SingleUserView = Backbone.Marionette.View.extend({
+const SingleDeviceView = Backbone.Marionette.View.extend({
   tagName: 'div',
-  template: require('../templates/single-user-view-template.html'),
+  template: require('../templates/single-device-view-template.html'),
   events: {
     'click .edit': 'handleClick'
   },
@@ -14,4 +14,4 @@ const SingleUserView = Backbone.Marionette.View.extend({
   }
 })
 
-export default SingleUserView
+export default SingleDeviceView

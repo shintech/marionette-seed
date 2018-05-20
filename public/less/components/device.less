@@ -1,0 +1,42 @@
+.device-view {
+  border: 1px solid black;
+  border-collapse: collapse;    
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  display: grid;
+  grid-gap: 2px;  
+  padding: 5px;
+  margin: 5px;
+}
+
+.device-view .device-user {
+  font-size: 12px;
+  grid-row: 2;
+  grid-column: 2;
+  color: grey;
+  text-align: right;
+}
+
+.device-view .device-model {
+  font-size: 10px;
+  grid-row: 2;  
+  grid-column: 2;
+  text-align: right;
+}
+
+.device-view .device-manufacturer {
+  font-size: 10px;
+  grid-row: 1;  
+  grid-column: 2;
+  text-align: right;
+}
+
+.device-view:hover{
+  color: red;
+  cursor: pointer;
+  background-color: darken(white, 12%);
+} 
+
+.device-view:hover .device-model {
+  color: green;
+}

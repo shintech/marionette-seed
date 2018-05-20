@@ -1,9 +1,9 @@
-import Model from '../models/User'
+import User from '../models/User'
 
 const FormView = Backbone.Marionette.View.extend({
-  template: require('../templates/form-view-template.html'),
-
   tagName: 'form',
+
+  template: require('../templates/user-form-template.html'),
 
   events: {
     'click .submit': 'submitForm'
@@ -13,27 +13,28 @@ const FormView = Backbone.Marionette.View.extend({
 
   initialize: function (options) {
     this.app = options.app
-    this.model = this.model || new Model()
+    this.collection = this.app.users
+    this.model = this.model || new User()
   },
 
   serializeData: function () {
-    let model = this.model
+    let user = this.model
 
     return {
-      first_name: model.get('first_name'),
-      last_name: model.get('last_name'),
-      email: model.get('email'),
-      optional: model.get('optional'),
-      message: model.get('message')
+      first_name: user.get('first_name'),
+      last_name: user.get('last_name'),
+      email: user.get('email'),
+      optional: user.get('optional'),
+      message: user.get('message')
     }
   },
 
   submitForm: function (e) {
     e.preventDefault()
     let app = this.app
-    let model = this.model
+    let user = this.model
 
-    const modelAttrs = {
+    let attrs = {
       first_name: $('[name="first_name"]').val(),
       last_name: $('[name="last_name"]').val(),
       email: $('[name="email"]').val(),
@@ -41,13 +42,13 @@ const FormView = Backbone.Marionette.View.extend({
       optional: $('[name="optional"]').val()
     }
 
-    model.set(modelAttrs)
+    user.set(attrs)
 
-    model.save(modelAttrs, {
+    user.save(attrs, {
       success: () => {
         console.log('success')
 
-        this.collection.add(model)
+        this.collection.add(user)
         app.modalView.hide()
         app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
       },

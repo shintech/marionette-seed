@@ -1,0 +1,30 @@
+<ul class="form-style">
+    <label>Serial <span class="required">*</span></label>
+    <input type="serial" name="serial" class="field-long" value="<%- serial %>" placeholder="Enter serial number..." />
+  </li>
+  
+  <li>
+    <label>Manufacturer <span class="required">*</span></label>
+    <select name="manufacturer" class="field-select">
+    <option value="<%- manufacturer %>" selected hidden ><%- manufacturer %></option>
+    <option value="Apple">Apple</option>
+    <option value="Samsung">Samsung</option>
+    <option value="HP">HP</option>
+    <option value="Acer">Acer</option>
+    </select>
+  </li>
+  
+  <li>
+    <label>Model <span class="required">*</span></label>
+    <select name="model" class="field-select">
+    <option value="<%- model %>" selected hidden ><%- model %></option>
+    <option value="Ipad">Ipad</option>
+    <option value="Galaxy Tab">Galaxy Tab</option>
+    </select>
+  </li>
+    
+  <li>
+    <button type="button" class="close">Close</button>
+    <button type="submit" class="submit">Submit</button>
+  </li>
+</ul>
