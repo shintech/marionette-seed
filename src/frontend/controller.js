@@ -10,6 +10,7 @@ import SingleUserView from './views/SingleUserView'
 import SingleDeviceView from './views/SingleDeviceView'
 import NavigationView from './views/NavigationView'
 import ModalView from './views/ModalView'
+import RootView from './views/RootView'
 
 const Controller = Marionette.Object.extend({
   initialize: async function (app) {
@@ -18,27 +19,36 @@ const Controller = Marionette.Object.extend({
     app.users = new Users()
     app.devices = new Devices()
 
+    app.view = new RootView(app)
+
+    app.navbar = new NavigationView({ app })
+
     try {
       await app.lookup(app.users)
       await app.lookup(app.devices)
     } catch (err) {
       console.error(err.message)
     }
-
     app.modalView = new ModalView(app)
 
     app.view.showChildView('modal', app.modalView)
-    app.view.showChildView('header', new NavigationView({ app }))
+    app.view.showChildView('header', app.navbar)
   },
 
   index: function () {
     let app = this.app
+
+    app.menu = 'index'
+
+    app.navbar.configureMenu('index')
 
     app.view.showChildView('content', new AboutView())
   },
 
   users: function () {
     let app = this.app
+
+    app.navbar.configureMenu('users')
 
     app.view.showChildView('content', new UsersView(app))
 
@@ -55,6 +65,8 @@ const Controller = Marionette.Object.extend({
 
   devices: function () {
     let app = this.app
+
+    app.navbar.configureMenu('devices')
 
     app.view.showChildView('content', new DevicesView(app))
 

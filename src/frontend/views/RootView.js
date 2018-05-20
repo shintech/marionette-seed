@@ -1,6 +1,8 @@
 const RootView = Backbone.Marionette.View.extend({
   className: 'root',
+
   template: require('../templates/root-view-template.html'),
+
   regions: {
     header: {
       el: '.header',

@@ -1,6 +1,5 @@
 import Backbone from 'backbone'
 import Marionette from 'marionette'
-import RootView from './views/RootView'
 import FlashMessage from './views/FlashMessage'
 require('babel-polyfill')
 
@@ -8,7 +7,6 @@ const App = Marionette.Application.extend({
   region: 'body',
 
   onStart: function () {
-    this.view = new RootView()
     this.showView(this.view)
 
     this.view.on('trigger:flash', (flash, message) => { // FormView.js

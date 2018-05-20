@@ -20,6 +20,20 @@ const NavigationView = Backbone.Marionette.View.extend({
   initialize: function (options) {
     this.app = options.app
     this.title = options.title || 'Default'
+  },
+
+  onAttach: function () {
+    if (this.app.menu === 'index') {
+      $('#create-new').hide()
+    }
+  },
+
+  configureMenu: function (route) {
+    if (route === 'index') {
+      $('#create-new').hide()
+    } else {
+      $('#create-new').show().css('display', 'block')
+    }
   }
 })
 
