@@ -15,6 +15,10 @@ const FormView = Backbone.Marionette.View.extend({
     this.app = options.app
     this.collection = this.app.devices
     this.model = this.model || new Device()
+
+    Backbone.Validation.bind(this, {
+      model: this.model
+    })
   },
 
   serializeData: function () {
@@ -40,21 +44,25 @@ const FormView = Backbone.Marionette.View.extend({
 
     device.set(attrs)
 
-    device.save(attrs, {
-      success: () => {
-        console.log('success')
+    if (device.isValid(true)) {
+      device.save(attrs, {
+        success: () => {
+          console.log('success')
 
-        this.collection.add(device)
-        app.modalView.hide()
-        app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
-      },
+          this.collection.add(device)
+          app.modalView.hide()
+          app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
 
-      error: (err) => {
-        console.error(err)
+          Backbone.Validation.unbind(this)
+        },
 
-        app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
-      }
-    })
+        error: (err) => {
+          console.error(err)
+
+          app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
+        }
+      })
+    }
   }
 })
 

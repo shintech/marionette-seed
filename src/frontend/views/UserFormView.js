@@ -15,6 +15,10 @@ const FormView = Backbone.Marionette.View.extend({
     this.app = options.app
     this.collection = this.app.users
     this.model = this.model || new User()
+
+    Backbone.Validation.bind(this, {
+      model: this.model
+    })
   },
 
   serializeData: function () {
@@ -44,21 +48,25 @@ const FormView = Backbone.Marionette.View.extend({
 
     user.set(attrs)
 
-    user.save(attrs, {
-      success: () => {
-        console.log('success')
+    if (user.isValid(true)) {
+      user.save(attrs, {
+        success: () => {
+          console.log('success')
 
-        this.collection.add(user)
-        app.modalView.hide()
-        app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
-      },
+          this.collection.add(user)
+          app.modalView.hide()
+          app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
 
-      error: (err) => {
-        console.error(err)
+          Backbone.Validation.unbind(this)
+        },
 
-        app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
-      }
-    })
+        error: (err) => {
+          console.error(err)
+
+          app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
+        }
+      })
+    }
   }
 })
 

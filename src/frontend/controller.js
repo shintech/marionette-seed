@@ -14,15 +14,13 @@ import ModalView from './views/ModalView'
 const Controller = Marionette.Object.extend({
   initialize: async function (app) {
     this.app = app
-    let users
-    let devices
 
     app.users = new Users()
     app.devices = new Devices()
 
     try {
-      users = await app.lookup(app.users)
-      devices = await app.lookup(app.devices)
+      await app.lookup(app.users)
+      await app.lookup(app.devices)
     } catch (err) {
       console.error(err.message)
     }
@@ -30,7 +28,7 @@ const Controller = Marionette.Object.extend({
     app.modalView = new ModalView(app)
 
     app.view.showChildView('modal', app.modalView)
-    app.view.showChildView('header', new NavigationView({ app, users, devices }))
+    app.view.showChildView('header', new NavigationView({ app }))
   },
 
   index: function () {

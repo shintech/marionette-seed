@@ -20,8 +20,6 @@ const NavigationView = Backbone.Marionette.View.extend({
   initialize: function (options) {
     this.app = options.app
     this.title = options.title || 'Default'
-    this.users = options.users
-    this.devices = options.devices
   }
 })
 
