@@ -28,8 +28,10 @@ const FormView = Backbone.Marionette.View.extend({
       first_name: user.get('first_name'),
       last_name: user.get('last_name'),
       email: user.get('email'),
+      message: user.get('message'),
       optional: user.get('optional'),
-      message: user.get('message')
+      username: user.get('username'),
+      password: user.get('password')
     }
   },
 
@@ -43,7 +45,9 @@ const FormView = Backbone.Marionette.View.extend({
       last_name: $('[name="last_name"]').val(),
       email: $('[name="email"]').val(),
       message: $('[name="message"]').val(),
-      optional: $('[name="optional"]').val()
+      optional: $('[name="optional"]').val(),
+      username: $('[name="username"]').val(),
+      password: $('[name="password"]').val()
     }
 
     user.set(attrs)

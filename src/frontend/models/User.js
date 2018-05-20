@@ -40,6 +40,20 @@ const User = Backbone.Model.extend({
         required: true,
         msg: 'Message is required....'
       }
+    ],
+
+    username: [
+      {
+        required: true,
+        msg: 'Username is required...'
+      }
+    ],
+
+    password: [
+      {
+        required: true,
+        msg: 'Password is required...'
+      }
     ]
   }
 })

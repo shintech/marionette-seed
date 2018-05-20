@@ -13,6 +13,8 @@ CREATE TABLE devices (
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
+  username VARCHAR,
+  password VARCHAR,
   first_name VARCHAR,
   last_name VARCHAR,
   optional VARCHAR,
@@ -33,22 +35,25 @@ VALUES ( 'Apple', 'LSKJ4389R34', 'Model-Number' );
 INSERT INTO devices ( manufacturer, serial, model )
 VALUES ( 'Samsung', 'LKSJ888KJS', 'Model-Number' );
 
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Fredrick', 'Mayer', 'ROI', 'Aron12@example.com', 'vertical embrace web-readiness' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Jean', 'Altenwerth', 'e-services', 'Trevor_Emard14@example.com', 'robust unleash niches' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Nadia', 'Tromp', 'e-services', 'Wyman72@example.net', 'plug-and-play productize platforms' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Rebecca', 'Feil', 'systems', 'Jackeline91@example.org', 'frictionless evolve functionalities' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Jarred', 'Prohaska', 'markets', 'Linda18@example.net', 'synergistic whiteboard metrics' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Muriel', 'Carter', 'web services', 'Thaddeus30@example.com', 'killer visualize systems' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Lizzie', 'Ward', 'metrics', 'Matteo.Mosciski@example.com', 'end-to-end monetize schemas' );
-INSERT INTO users ( first_name, last_name, optional, email, message )
-VALUES ( 'Kill', 'Bill', 'option1', 'killbill@example.org', '$2a$10$dbnjt3x9vj4brOcq0qyxyOmhw6XZJV3o5SdFDtDkFs4t1X4KhW46m' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Stephania_Christiansen', 'YWX4hGcCSe9qDa3', 'Vernie', 'Corwin', 'schemas', 'Jaeden_Zboncak74@example.net', 'cutting-edge synergize action-items' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Braeden_Dach', 'eWzqn7sBvPPJWYx', 'Ezekiel', 'Haley', 'platforms', 'Jody.Kilback@example.com', 'cross-media streamline web-readiness' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Daisy93', 'hLgrCTFUuFAYryw', 'Katlyn', 'Larkin', 'markets', 'Scotty27@example.net', 'sexy architect infrastructures' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Samantha17', 'iuFZFvXJKi4KNPh', 'Adela', 'Green', 'bandwidth', 'Ramona_Cruickshank68@example.com', 'cross-platform scale niches' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Gerald_Littel39', 'X8bRZKT903_Nlv1', 'Annetta', 'Schultz', 'convergence', 'Lisa23@example.org', 'customized repurpose infomediaries' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Geo.Klein', 'eoWSq3ZrfPmomF0', 'Chesley', 'Haley', 'platforms', 'Robert_Dickens33@example.net', 'rich redefine networks' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Germaine_McKenzie19', 'najL1zWd3h0xeAY', 'River', 'Romaguera', 'networks', 'Kaya.Heathcote@example.net', 'transparent unleash communities' );
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'Kaleigh74', 'jzcHEM6PnTOXqqg', 'Allen', 'Wisozk', 'bandwidth', 'Amya57@example.com', 'back-end facilitate web services' );
+
+INSERT INTO users ( username, password, first_name, last_name, optional, email, message )
+VALUES ( 'killbill', '$2a$10$dbnjt3x9vj4brOcq0qyxyOmhw6XZJV3o5SdFDtDkFs4t1X4KhW46m', 'Kill', 'Bill', 'option1', 'killbill@example.org', '$2a$10$dbnjt3x9vj4brOcq0qyxyOmhw6XZJV3o5SdFDtDkFs4t1X4KhW46m' );
 
 
 ---------------------------------------------------------------------------
@@ -68,6 +73,8 @@ CREATE TABLE devices (
 
 CREATE TABLE users (
   ID SERIAL PRIMARY KEY,
+  username VARCHAR,
+  password VARCHAR,  
   first_name VARCHAR,
   last_name VARCHAR,
   optional VARCHAR,
