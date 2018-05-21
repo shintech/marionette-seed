@@ -23,17 +23,17 @@ const NavigationView = Backbone.Marionette.View.extend({
   },
 
   onAttach: function () {
-    if (this.app.menu === 'index') {
-      $('#create-new').hide()
-    }
+    this.configureMenu()
   },
 
-  configureMenu: function (route) {
-    if (route === 'index') {
+  configureMenu: function () {
+    if (this.app.menu === 'index') {
       $('#create-new').hide()
     } else {
       $('#create-new').show().css('display', 'block')
     }
+
+    $(`.nav-${this.app.menu}`).addClass('active')
   }
 })
 

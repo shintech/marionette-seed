@@ -38,9 +38,11 @@ const Controller = Marionette.Object.extend({
   index: function () {
     let app = this.app
 
-    app.menu = 'index'
+    $(`.nav-${app.menu}`).removeClass('active')
 
-    app.navbar.configureMenu('index')
+    app.menu = 'index' // *1
+
+    app.navbar.configureMenu()
 
     app.view.showChildView('content', new AboutView())
   },
@@ -48,7 +50,11 @@ const Controller = Marionette.Object.extend({
   users: function () {
     let app = this.app
 
-    app.navbar.configureMenu('users')
+    $(`.nav-${app.menu}`).removeClass('active')
+
+    app.menu = 'users' // *1
+
+    app.navbar.configureMenu()
 
     app.view.showChildView('content', new UsersView(app))
 
@@ -66,7 +72,11 @@ const Controller = Marionette.Object.extend({
   devices: function () {
     let app = this.app
 
-    app.navbar.configureMenu('devices')
+    $(`.nav-${app.menu}`).removeClass('active')
+
+    app.menu = 'devices' // *1
+
+    app.navbar.configureMenu()
 
     app.view.showChildView('content', new DevicesView(app))
 
@@ -83,3 +93,7 @@ const Controller = Marionette.Object.extend({
 })
 
 export default Controller
+
+/**
+  1. app.navbar.onAttach and app.navbar.configureMenu use to check if there needs to be a create new item link added or removed from the drop down menu and to determine which tab is currently active. The jquery function $(`.nav-${app.menu}`).removeClass('active') is called before setting this variable in order to remove the active class from the previously active tab. The a tags in the navigation view template have the class name nav-${app.menu}.
+**/
