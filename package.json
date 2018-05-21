@@ -1,10 +1,10 @@
 {
   "name": "marionette-seed",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node start.js",
     "dev": "NODE_ENV=development PORT=8000 TZ='America/Chicago' nodemon start.js",
     "test": "NODE_ENV=test PORT=8001 TZ='America/Chicago' mocha dist/test -t 10000",
     "build": "babel -d dist src",
