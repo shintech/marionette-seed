@@ -1,23 +1,9 @@
 import Backbone from 'backbone'
 import Marionette from 'marionette'
-import FlashMessage from './views/FlashMessage'
 require('babel-polyfill')
 
 const App = Marionette.Application.extend({
   region: 'body',
-
-  onStart: function () {
-    this.showView(this.view)
-
-    this.view.on('trigger:flash', (flash, message) => { // FormView.js
-      let flashMessage = new FlashMessage({flash, message})
-
-      this.view.showChildView('flash', flashMessage)
-      flashMessage.show()
-    })
-
-    Backbone.history.start()
-  },
 
   lookup: function (collection) {
     let defer = $.Deferred()
@@ -33,6 +19,12 @@ const App = Marionette.Application.extend({
     })
 
     return defer.promise()
+  },
+
+  onStart: function (app) {
+    app.showView(app.view)
+
+    Backbone.history.start()
   }
 })
 

@@ -14,8 +14,20 @@ const AboutView = Backbone.Marionette.View.extend({
     'dragstart': 'startDrag'
   },
 
-  initialize: function () {
+  initialize: function (app) {
     this.draggable = ''
+    this.users = app.users
+    this.devices = app.devices
+  },
+
+  serializeData: function () {
+    let users = this.users
+    let devices = this.devices
+
+    return {
+      users: users,
+      devices: devices
+    }
   },
 
   enterDropZone: function (e) {

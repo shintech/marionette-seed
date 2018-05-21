@@ -42,10 +42,8 @@ _.extend(Backbone.Validation.callbacks, {
   }
 })
 
-const app = new App()
+const app = new App() // app is instantiated here but started in app.controller.initialize
 
 app.controller = new Controller(app)
 
 app.Router = new Router(app)
-
-app.start()

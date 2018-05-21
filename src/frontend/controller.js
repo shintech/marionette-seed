@@ -19,20 +19,21 @@ const Controller = Marionette.Object.extend({
     app.users = new Users()
     app.devices = new Devices()
 
-    app.view = new RootView(app)
-
-    app.navbar = new NavigationView({ app })
-
     try {
       await app.lookup(app.users)
       await app.lookup(app.devices)
     } catch (err) {
       console.error(err.message)
     }
+
+    app.view = new RootView(app)
+    app.navbar = new NavigationView({ app })
     app.modalView = new ModalView(app)
 
     app.view.showChildView('modal', app.modalView)
     app.view.showChildView('header', app.navbar)
+
+    app.start(app)
   },
 
   index: function () {
@@ -44,7 +45,7 @@ const Controller = Marionette.Object.extend({
 
     app.navbar.configureMenu()
 
-    app.view.showChildView('content', new AboutView())
+    app.view.showChildView('content', new AboutView(app))
   },
 
   users: function () {
