@@ -1,9 +1,9 @@
-import Device from '../models/Device'
+import Device from '../../models/Device'
 
 const FormView = Backbone.Marionette.View.extend({
   tagName: 'form',
 
-  template: require('../templates/device-form-template.html'),
+  template: require('../../templates/device-form-template.html'),
 
   events: {
     'click .submit': 'submitForm'

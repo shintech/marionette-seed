@@ -6,10 +6,14 @@ const NavigationView = Backbone.Marionette.View.extend({
   events: {
     'click #create-new': function () {
       this.app.view.triggerMethod('modal:form', null)
+    },
+
+    'click #login': function () {
+      this.app.view.triggerMethod('modal:login', null)
     }
   },
 
-  template: require('../templates/navigation-view-template.html'),
+  template: require('../../templates/navigation-view-template.html'),
 
   serializeData: function () {
     return {

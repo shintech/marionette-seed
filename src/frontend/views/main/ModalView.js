@@ -1,7 +1,7 @@
 const ModalView = Backbone.Marionette.View.extend({
   className: 'modal fade',
 
-  template: require('../templates/modal-view-template.html'),
+  template: require('../../templates/modal-view-template.html'),
 
   regions: {
     head: {

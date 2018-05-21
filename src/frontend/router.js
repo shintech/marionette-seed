@@ -4,7 +4,8 @@ const Router = Marionette.AppRouter.extend({
   appRoutes: {
     '': 'index',
     'users': 'users',
-    'devices': 'devices'
+    'devices': 'devices',
+    'login': 'login'
   }
 })
 

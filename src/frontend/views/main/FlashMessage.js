@@ -1,6 +1,6 @@
 const FlashMessage = Backbone.Marionette.View.extend({
   className: 'flash',
-  template: require('../templates/flash-message-template.html'),
+  template: require('../../templates/flash-message-template.html'),
 
   serializeData: function () {
     let message = this.message

@@ -1,6 +1,6 @@
 const SingleDeviceView = Backbone.Marionette.View.extend({
   tagName: 'div',
-  template: require('../templates/single-device-view-template.html'),
+  template: require('../../templates/single-device-view-template.html'),
   events: {
     'click .edit': 'handleClick'
   },

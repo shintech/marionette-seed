@@ -1,3 +1,5 @@
+import User from '../../models/User'
+
 const UserView = Backbone.Marionette.View.extend({
   initialize: function (app) {
     this.app = app
@@ -5,9 +7,11 @@ const UserView = Backbone.Marionette.View.extend({
 
   className: 'user-view',
 
+  model: User,
+
   tagName: 'li',
 
-  template: require('../templates/user-view-template.html'),
+  template: require('../../templates/user-view-template.html'),
 
   events: {
     'click': 'handleClick'

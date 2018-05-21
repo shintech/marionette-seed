@@ -3,10 +3,10 @@ import FlashMessage from './FlashMessage'
 const RootView = Backbone.Marionette.View.extend({
   className: 'root',
 
-  template: require('../templates/root-view-template.html'),
+  template: require('../../templates/root-view-template.html'),
 
   initialize: function (app) {
-    this.on('trigger:flash', (flash, message) => { // FormView.js
+    this.on('trigger:flash', (flash, message) => { // FormView.js, LoginView.js
       let flashMessage = new FlashMessage({flash, message})
 
       this.showChildView('flash', flashMessage)

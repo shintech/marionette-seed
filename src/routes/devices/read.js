@@ -5,7 +5,7 @@ export default function (options) {
 
   return {
     all: async function (req, res) {
-      let response, result, meta, status
+      let response, meta, status
 
       options.startTime = Date.now()
 
@@ -14,19 +14,19 @@ export default function (options) {
         meta = await MetaData(req, response, 10)
         status = 200
       } catch (err) {
-        result = { error: err.message || err }
+        response = { error: err.message || err }
         status = (err.constructor.name === 'QueryResultError') ? 404 : 500
 
-        logger.error(result.error)
+        logger.error(response.error)
       }
 
-      result = { meta, response }
+      let obj = { meta, response }
 
       res.status(status)
         .format({
           json: () => {
-            res.set(headers(result, options))
-              .write(JSON.stringify(result))
+            res.set(headers(obj, options))
+              .write(JSON.stringify(obj))
 
             res.end()
           }

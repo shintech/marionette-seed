@@ -1,6 +1,6 @@
 const SingleUserView = Backbone.Marionette.View.extend({
   tagName: 'div',
-  template: require('../templates/single-user-view-template.html'),
+  template: require('../../templates/single-user-view-template.html'),
   events: {
     'click .edit': 'handleClick'
   },

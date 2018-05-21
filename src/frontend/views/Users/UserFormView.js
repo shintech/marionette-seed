@@ -1,9 +1,9 @@
-import User from '../models/User'
+import User from '../../models/User'
 
 const FormView = Backbone.Marionette.View.extend({
   tagName: 'form',
 
-  template: require('../templates/user-form-template.html'),
+  template: require('../../templates/user-form-template.html'),
 
   events: {
     'click .submit': 'submitForm'
