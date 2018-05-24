@@ -16,3 +16,4 @@ shintech*
 /utilities
 *-env.sh
 /*.log
+/public/js/bundle.*

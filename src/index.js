@@ -14,15 +14,9 @@ export function start (options, callback) {
   app.use('/api', router)
 
   app.get('/', (req, res) => {
-    let message = `${res.statusCode}: Success...`
-
     res.status(200)
       .render('index', {
-        title: 'Success',
-        heading: 'Success',
-        url: req.url,
-        status: res.statusCode,
-        message: message
+        title: 'marionette.seed'
       })
   })
 

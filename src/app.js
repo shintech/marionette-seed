@@ -20,7 +20,6 @@ export default function (options) {
 
   app.use('/vendor', express.static(path.join(basedir, 'node_modules')))
   app.use('/public', express.static(path.join(basedir, 'public')))
-  app.use('/frontend', express.static(path.join(basedir, 'dist', 'frontend')))
 
   app.set('view engine', 'pug')
 
