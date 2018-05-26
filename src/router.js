@@ -8,7 +8,7 @@ export default function (options) {
     .post(auth(options).login)
 
   router.route('/home')
-    .get(home(options).home)
+    .get(Auth, home(options).home)
 
   router.route('/users')
     .get(users(options).read.all)
@@ -29,4 +29,16 @@ export default function (options) {
     .delete(devices(options).destroy)
 
   return router
+}
+
+function Auth (req, res, next) {
+  console.log(req.session)
+  if (req.session.user) {
+    next()
+  } else {
+    res.status(401)
+      .json({
+        message: 'Please log in...'
+      })
+  }
 }

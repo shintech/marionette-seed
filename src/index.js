@@ -6,19 +6,14 @@ import configDB from './db'
 export function start (options, callback) {
   const app = configApp(options)
   const server = configServer(app, options)
+
   options.db = configDB(options)
+
   const router = configRouter(options)
 
   const { environment } = options
 
   app.use('/api', router)
-
-  app.get('/', (req, res) => {
-    res.status(200)
-      .render('index', {
-        title: 'marionette.seed'
-      })
-  })
 
   app.use(function (req, res) {
     res.status(400)

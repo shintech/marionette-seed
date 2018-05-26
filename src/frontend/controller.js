@@ -105,7 +105,7 @@ const Controller = Marionette.Object.extend({
 
     $(`.nav-${app.menu}`).removeClass('active')
 
-    app.menu = 'devices' // *1
+    app.menu = 'login' // *1
 
     app.navbar.configureMenu()
 
