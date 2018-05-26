@@ -32,7 +32,6 @@ export default function (options) {
 }
 
 function Auth (req, res, next) {
-  console.log(req.session)
   if (req.session.user) {
     next()
   } else {
