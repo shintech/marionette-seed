@@ -1,9 +1,9 @@
 import DeviceView from './DeviceView'
 
 const DevicesView = Backbone.Marionette.CollectionView.extend({
-  initialize: function (app) {
+  initialize: function (app, collection) {
     this.app = app
-    this.collection = app.devices
+    this.collection = collection
     this.collection.on('sync', this.render)
   },
 

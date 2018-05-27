@@ -1,9 +1,9 @@
 import UserView from './UserView'
 
 const UsersView = Backbone.Marionette.CollectionView.extend({
-  initialize: function (app) {
+  initialize: function (app, collection) {
     this.app = app
-    this.collection = app.users
+    this.collection = collection
     this.collection.on('sync', this.render)
   },
 

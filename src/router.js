@@ -11,22 +11,22 @@ export default function (options) {
     .get(Auth, home(options).home)
 
   router.route('/users')
-    .get(users(options).read.all)
-    .post(users(options).create)
+    .get(Auth, users(options).read.all)
+    .post(Auth, users(options).create)
 
   router.route('/users/:id')
-    .get(users(options).read.one)
-    .put(users(options).update)
-    .delete(users(options).destroy)
+    .get(Auth, users(options).read.one)
+    .put(Auth, users(options).update)
+    .delete(Auth, users(options).destroy)
 
   router.route('/devices')
-    .get(devices(options).read.all)
-    .post(devices(options).create)
+    .get(Auth, devices(options).read.all)
+    .post(Auth, devices(options).create)
 
   router.route('/devices/:id')
-    .get(devices(options).read.one)
-    .put(devices(options).update)
-    .delete(devices(options).destroy)
+    .get(Auth, devices(options).read.one)
+    .put(Auth, devices(options).update)
+    .delete(Auth, devices(options).destroy)
 
   return router
 }

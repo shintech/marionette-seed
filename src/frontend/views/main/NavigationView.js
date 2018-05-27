@@ -8,9 +8,7 @@ const NavigationView = Backbone.Marionette.View.extend({
       this.app.view.triggerMethod('modal:form', null)
     },
 
-    'click #login': function () {
-      this.app.view.triggerMethod('modal:login', null)
-    }
+    'click #logout': 'logout'
   },
 
   template: require('../../templates/navigation-view-template.html'),
@@ -31,13 +29,35 @@ const NavigationView = Backbone.Marionette.View.extend({
   },
 
   configureMenu: function () {
-    if (this.app.menu === 'index') {
-      $('#create-new').hide()
+    if (this.app.session.get('authenticated')) {
+      $('.dropbtn').html(`${this.app.session.get('user').username} &blacktriangledown;`)
+      $('#login').hide()
+      $('#logout').show()
+
+      if (this.app.menu === 'index') {
+        $('#create-new').hide()
+      } else {
+        $('#create-new').show().css('display', 'block')
+      }
     } else {
-      $('#create-new').show().css('display', 'block')
+      $('.dropbtn').html(`actions &blacktriangledown;`)
+      $('#login').show()
+      $('#logout').hide()
+      $('#create-new').hide()
     }
 
     $(`.nav-${this.app.menu}`).addClass('active')
+  },
+
+  logout: function () {
+    let app = this.app
+
+    app.session.logout(function () {
+      console.log('success')
+      app.view.triggerMethod('trigger:flash', 'success', 'Logged out...') // RootView.js
+    })
+
+    this.configureMenu()
   }
 })
 

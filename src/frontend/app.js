@@ -22,6 +22,9 @@ const App = Marionette.Application.extend({
   },
 
   onStart: function (app) {
+    app.view.showChildView('modal', app.modalView)
+    app.view.showChildView('header', app.navbar)
+
     app.showView(app.view)
 
     Backbone.history.start()

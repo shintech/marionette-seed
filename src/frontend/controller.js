@@ -1,7 +1,5 @@
 import Marionette from 'marionette'
-import NavigationView from './views/main/NavigationView'
-import ModalView from './views/main/ModalView'
-import RootView from './views/main/RootView'
+
 import AboutView from './views/main/AboutView'
 import LoginView from './views/main/LoginView'
 
@@ -22,26 +20,10 @@ const Controller = Marionette.Object.extend({
     app.users = new Users()
     app.devices = new Devices()
 
-    try {
-      await app.lookup(app.users)
-      await app.lookup(app.devices)
-    } catch (err) {
-      console.error(err.message)
-    }
-
-    app.view = new RootView(app)
-    app.navbar = new NavigationView({ app })
-    app.modalView = new ModalView(app)
-
-    app.view.showChildView('modal', app.modalView)
-    app.view.showChildView('header', app.navbar)
-
     app.view.on('modal:login', (model, collection) => { // This is triggered in NavigationView
       app.modalView.showChildView('body', new LoginView({ app, model }))
       app.modalView.show()
     })
-
-    app.start(app)
   },
 
   index: function () {
@@ -49,15 +31,27 @@ const Controller = Marionette.Object.extend({
 
     $(`.nav-${app.menu}`).removeClass('active')
 
-    app.menu = 'index' // *1
+    if (!app.session.get('authenticated')) {
+      app.session.set('redirectFrom', '/')
 
-    app.navbar.configureMenu()
+      Backbone.history.navigate('#login', { trigger: true })
+    } else {
+      app.menu = 'index' // *1
 
-    app.view.showChildView('content', new AboutView(app))
+      app.navbar.configureMenu()
+
+      app.view.showChildView('content', new AboutView(app))
+    }
   },
 
-  users: function () {
+  users: async function () {
     let app = this.app
+
+    try {
+      app.users = await app.lookup(app.users)
+    } catch (err) {
+      console.error(err.message)
+    }
 
     $(`.nav-${app.menu}`).removeClass('active')
 
@@ -65,7 +59,7 @@ const Controller = Marionette.Object.extend({
 
     app.navbar.configureMenu()
 
-    app.view.showChildView('content', new UsersView(app))
+    app.view.showChildView('content', new UsersView(app, app.users))
 
     app.view.on('modal:user', (model) => { // This is triggered in UserView.js
       app.modalView.showChildView('body', new SingleUserView({ app, model }))
@@ -78,8 +72,14 @@ const Controller = Marionette.Object.extend({
     })
   },
 
-  devices: function () {
+  devices: async function () {
     let app = this.app
+
+    try {
+      app.devices = await app.lookup(app.devices)
+    } catch (err) {
+      console.error(err.message)
+    }
 
     $(`.nav-${app.menu}`).removeClass('active')
 
@@ -87,7 +87,7 @@ const Controller = Marionette.Object.extend({
 
     app.navbar.configureMenu()
 
-    app.view.showChildView('content', new DevicesView(app))
+    app.view.showChildView('content', new DevicesView(app, app.devices))
 
     app.view.on('modal:device', (model) => { // This is triggered in DeviceView.js
       app.modalView.showChildView('body', new SingleDeviceView({ app, model }))

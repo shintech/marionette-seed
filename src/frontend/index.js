@@ -1,9 +1,20 @@
 import App from './app'
 import Router from './router'
 import Controller from './controller'
+import Session from './models/Session'
+import RootView from './views/main/RootView'
+import NavigationView from './views/main/NavigationView'
+import ModalView from './views/main/ModalView'
 require('../../public/less/index.less')
 
 let previousError
+
+$.ajaxSetup({
+  statusCode: {
+    401: function () { window.location.replace('#login') },
+    403: function () { window.location.replace('#denied') }
+  }
+})
 
 _.extend(Backbone.Validation.callbacks, {
   valid: function (view, attr, selector) {
@@ -23,6 +34,7 @@ _.extend(Backbone.Validation.callbacks, {
       $group.find('.help-block').html('').addClass('hidden')
     }
   },
+
   invalid: function (view, attr, error, selector) {
     const $el = view.$('[name=' + attr + ']')
     const $group = $el.closest('.form-group')
@@ -44,6 +56,11 @@ _.extend(Backbone.Validation.callbacks, {
 
 const app = new App() // app is instantiated here but started in app.controller.initialize
 
+app.session = new Session(app)
+app.view = new RootView(app)
+app.navbar = new NavigationView({ app })
+app.modalView = new ModalView(app)
 app.controller = new Controller(app)
-
 app.Router = new Router(app)
+
+app.start(app)
