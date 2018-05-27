@@ -81,7 +81,7 @@ export default function (options) {
     let password = req.body.password
 
     try {
-      user = await options.db.one('select id, username, password from users where username = $1', username)
+      user = await options.db.one('select id, username, first_name, last_name, password from users where username = $1', username)
       passwordCheck = await bcrypt.compare(password, user.password)
       status = 200
     } catch (err) {
@@ -94,7 +94,8 @@ export default function (options) {
     if (user.id && passwordCheck) {
       let session = {
         id: user.id,
-        username: user.username
+        username: user.username,
+        fullName: `${user.first_name} ${user.last_name}`
       }
 
       req.session.user = session

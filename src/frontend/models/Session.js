@@ -73,8 +73,7 @@ const Session = Backbone.Model.extend({
       .done(function (response) {
         app.session.set('authenticated', true)
         app.session.set('user', JSON.stringify(response.user))
-
-        app.view.triggerMethod('trigger:flash', 'success', `Logged in as user ${response.user.username}...`) // RootView.js
+        app.view.triggerMethod('trigger:flash', 'success', `Logged in as user ${response.user.fullName}...`) // RootView.js
         // app.modalView.hide()
 
         if (that.get('redirectFrom')) {
