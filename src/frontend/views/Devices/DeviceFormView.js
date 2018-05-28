@@ -39,27 +39,7 @@ const FormView = BaseFormView.extend({
       manufacturer: $('[name="manufacturer"]').val()
     }
 
-    device.set(attrs)
-
-    if (device.isValid(true)) {
-      device.save(attrs, {
-        success: () => {
-          console.log('success')
-
-          this.collection.add(device)
-          app.modalView.hide()
-          app.view.triggerMethod('trigger:flash', 'success', 'Success...') // app.js
-
-          Backbone.Validation.unbind(this)
-        },
-
-        error: (err) => {
-          console.error(err)
-
-          app.view.triggerMethod('trigger:flash', 'error', 'Error...') // app.js
-        }
-      })
-    }
+    this.constructor.prototype.submit.call(this, app, device, attrs)
   }
 })
 
