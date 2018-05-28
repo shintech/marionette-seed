@@ -14,10 +14,6 @@ const Session = Backbone.Model.extend({
     }
   },
 
-  changeFunction () {
-    console.log('changed')
-  },
-
   get: function (key) {
     if (this.supportStorage) {
       var data = sessionStorage.getItem(key)
