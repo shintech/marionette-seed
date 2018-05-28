@@ -1,17 +1,7 @@
-const SingleUserView = Backbone.Marionette.View.extend({
-  tagName: 'div',
-  template: require('../../templates/single-user-view-template.html'),
-  events: {
-    'click .edit': 'handleClick'
-  },
+import BaseModelView from '../BaseModelView'
 
-  initialize: function (options) {
-    this.app = options.app
-  },
-
-  handleClick: function () {
-    this.app.view.triggerMethod('modal:form', this.model)
-  }
+const SingleUserView = BaseModelView.extend({
+  template: require('../../templates/single-user-view-template.html')
 })
 
 export default SingleUserView

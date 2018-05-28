@@ -14,6 +14,7 @@ const Router = Marionette.AppRouter.extend({
 
   onRoute: function (route) {
     let app = this.app
+
     if (!app.session.get('authenticated')) {
       if (route === 'index') route = '/'
       if (route !== 'login') app.session.set('redirectFrom', route)

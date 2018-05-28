@@ -1,15 +1,10 @@
+import BaseItemView from '../BaseItemView'
 import User from '../../models/User'
 
-const UserView = Backbone.Marionette.View.extend({
-  initialize: function (app) {
-    this.app = app
-  },
-
+const UserView = BaseItemView.extend({
   className: 'user-view',
 
   model: User,
-
-  tagName: 'li',
 
   template: require('../../templates/user-view-template.html'),
 

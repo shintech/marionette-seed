@@ -1,15 +1,10 @@
+import BaseItemView from '../BaseItemView'
 import Device from '../../models/Device'
 
-const DeviceView = Backbone.Marionette.View.extend({
-  initialize: function (app) {
-    this.app = app
-  },
-
+const DeviceView = BaseItemView.extend({
   className: 'device-view',
 
   model: Device,
-
-  tagName: 'li',
 
   template: require('../../templates/device-view-template.html'),
 

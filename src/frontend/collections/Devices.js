@@ -1,13 +1,9 @@
+import BaseCollection from './BaseCollection'
 import Device from '../models/Device'
 
-const Devices = Backbone.Collection.extend({
+const Devices = BaseCollection.extend({
   model: Device,
-
-  url: '/api/devices',
-
-  parse: function (data) {
-    return data['response']
-  }
+  url: '/api/devices'
 })
 
 export default Devices

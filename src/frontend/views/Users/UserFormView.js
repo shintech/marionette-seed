@@ -1,15 +1,12 @@
+import BaseFormView from '../BaseFormView'
 import User from '../../models/User'
 
-const FormView = Backbone.Marionette.View.extend({
-  tagName: 'form',
-
+const FormView = BaseFormView.extend({
   template: require('../../templates/user-form-template.html'),
 
   events: {
     'click .submit': 'submitForm'
   },
-
-  className: 'form',
 
   initialize: function (options) {
     this.app = options.app

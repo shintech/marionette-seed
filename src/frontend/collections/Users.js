@@ -1,13 +1,9 @@
+import BaseCollection from './BaseCollection'
 import User from '../models/User'
 
-const Users = Backbone.Collection.extend({
+const Users = BaseCollection.extend({
   model: User,
-
-  url: '/api/users',
-
-  parse: function (data) {
-    return data['response']
-  }
+  url: '/api/users'
 })
 
 export default Users

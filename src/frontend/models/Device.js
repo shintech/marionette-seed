@@ -1,6 +1,6 @@
-import validation from 'backbone-validation' // eslint-disable-line
+import BaseModel from './BaseModel'
 
-const Device = Backbone.Model.extend({
+const Device = BaseModel.extend({
   urlRoot: '/api/devices',
   validation: {
     manufacturer: [

@@ -1,6 +1,6 @@
-import validation from 'backbone-validation' // eslint-disable-line
+import BaseModel from './BaseModel'
 
-const User = Backbone.Model.extend({
+const User = BaseModel.extend({
   urlRoot: '/api/users',
   validation: {
     first_name: [
