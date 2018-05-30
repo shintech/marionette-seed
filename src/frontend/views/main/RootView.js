@@ -29,6 +29,9 @@ const RootView = Backbone.Marionette.View.extend({
     modal: {
       el: '.modal',
       replaceElement: true
+    },
+    footer: {
+      el: '.footer'
     }
   }
 })

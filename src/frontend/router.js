@@ -19,6 +19,10 @@ const Router = Marionette.AppRouter.extend({
       if (route === 'index') route = '/'
       if (route !== 'login') app.session.set('redirectFrom', route)
     }
+    
+    if (app.pagination) {
+      app.pagination.destroy()
+    }    
   }
 })
 

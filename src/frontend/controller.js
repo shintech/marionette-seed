@@ -2,6 +2,7 @@ import Marionette from 'marionette'
 
 import AboutView from './views/main/AboutView'
 import LoginView from './views/main/LoginView'
+import PaginationView from './views/main/PaginationView'
 
 import Users from './collections/Users'
 import UsersView from './views/Users/UsersView'
@@ -17,8 +18,8 @@ const Controller = Marionette.Object.extend({
   initialize: async function (app) {
     this.app = app
 
-    app.users = new Users()
-    app.devices = new Devices()
+    app.users = new Users(app)
+    app.devices = new Devices(app)
 
     app.view.on('modal:login', (model, collection) => { // This is triggered in NavigationView
       app.modalView.showChildView('body', new LoginView({ app, model }))
@@ -30,6 +31,10 @@ const Controller = Marionette.Object.extend({
     let app = this.app
 
     $(`.nav-${app.menu}`).removeClass('active')
+    
+    if (app.pagination) {
+      app.pagination.destroy()
+    }
 
     if (!app.session.get('authenticated')) {
       app.session.set('redirectFrom', '/')
@@ -46,7 +51,7 @@ const Controller = Marionette.Object.extend({
 
   users: async function () {
     let app = this.app
-
+    console.log('init')
     try {
       app.users = await app.lookup(app.users)
     } catch (err) {
@@ -58,8 +63,10 @@ const Controller = Marionette.Object.extend({
     app.menu = 'users' // *1
 
     app.navbar.configureMenu()
-
+    
+    app.pagination = new PaginationView(app, app.users)
     app.view.showChildView('content', new UsersView(app, app.users))
+    app.view.showChildView('footer', app.pagination)
 
     app.view.on('modal:user', (model) => { // This is triggered in UserView.js
       app.modalView.showChildView('body', new SingleUserView({ app, model }))
@@ -86,8 +93,10 @@ const Controller = Marionette.Object.extend({
     app.menu = 'devices' // *1
 
     app.navbar.configureMenu()
+    app.pagination = new PaginationView(app, app.devices)
 
     app.view.showChildView('content', new DevicesView(app, app.devices))
+    app.view.showChildView('footer', app.pagination)
 
     app.view.on('modal:device', (model) => { // This is triggered in DeviceView.js
       app.modalView.showChildView('body', new SingleDeviceView({ app, model }))
