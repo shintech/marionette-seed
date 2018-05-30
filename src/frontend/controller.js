@@ -31,10 +31,6 @@ const Controller = Marionette.Object.extend({
     let app = this.app
 
     $(`.nav-${app.menu}`).removeClass('active')
-    
-    if (app.pagination) {
-      app.pagination.destroy()
-    }
 
     if (!app.session.get('authenticated')) {
       app.session.set('redirectFrom', '/')

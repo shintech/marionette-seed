@@ -5,7 +5,6 @@ import Session from './models/Session'
 import RootView from './views/main/RootView'
 import NavigationView from './views/main/NavigationView'
 import ModalView from './views/main/ModalView'
-import PaginationView from './views/main/PaginationView'
 require('../../public/less/index.less')
 
 let previousError

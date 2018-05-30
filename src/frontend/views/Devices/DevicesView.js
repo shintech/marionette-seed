@@ -21,7 +21,7 @@ const DevicesView = BaseCollectionView.extend({
 
   childViewOptions: function () {
     return this.app
-  }    
+  }
 })
 
 export default DevicesView

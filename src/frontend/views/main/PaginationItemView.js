@@ -2,12 +2,12 @@ const PageNavigationItemView = Backbone.Marionette.View.extend({
   tagName: 'li',
 
   template: require('../../templates/pagination-view-template.html'),
-  
+
   initialize: function (options) {
     this.parent = options.parent
     this.page = this.model.get('page')
   },
-  
+
   onRender: function () {
     if (this.model.get('active') === 'active') {
       this.el.className = 'active'
@@ -15,11 +15,11 @@ const PageNavigationItemView = Backbone.Marionette.View.extend({
       this.el.className = 'disabled'
     }
   },
-  
+
   events: {
     'click': 'handleClick'
   },
-  
+
   handleClick: function (e) {
     e.preventDefault()
     this.model.set('page', this.page)

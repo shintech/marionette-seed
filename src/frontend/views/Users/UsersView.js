@@ -4,7 +4,7 @@ import UserView from './UserView'
 const UsersView = BaseCollectionView.extend({
   className: 'content-view',
   childView: UserView,
-  
+
   initialize: function (app, collection) {
     this.app = app
     let models
@@ -22,8 +22,8 @@ const UsersView = BaseCollectionView.extend({
 
   childViewOptions: function () {
     return this.app
-  }  
-  
+  }
+
 })
 
 export default UsersView

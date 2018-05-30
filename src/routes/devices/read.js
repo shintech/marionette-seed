@@ -8,24 +8,24 @@ export default function (options) {
       let response, meta, status
       let pageSize = 16
       let page = parseInt(req.query.page)
-      
-      let offset = (page !== 1) ? (page - 1) * pageSize: 0
+
+      let offset = (page !== 1) ? (page - 1) * pageSize : 0
       options.startTime = Date.now()
 
       try {
         let query = `select count(*) over() total_count, * from devices order by id asc offset ${offset} fetch next ${pageSize} rows only;`
-        
+
         response = await db.any(query)
-        
+
         let count = response[0].total_count
         let pageCount = count / pageSize
-        
+
         meta = {
           count: count,
           pageSize: pageSize,
-          pageCount: pageCount 
+          pageCount: pageCount
         }
-                
+
         status = 200
       } catch (err) {
         response = { error: err.message || err }
